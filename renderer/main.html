@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
+    <title>AI DOCS</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="upload" id="upload">
+        <div class="upload__border">
+            <img src="img/upload.png" class="upload__img">
+            <p class="img/upload__text">Перетащите свой файл</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="main">
+      <div class="docs">
+        <div class="docs__header">
+          Документы
+        </div>
+        <div class="docs__items" id="docs__items"></div>
+      </div>
+      <div class="results">
+        <div class="results__header">
+          Результат распознавания
+        </div>
+      </div>
+      <div class="structure">
+        <div class="structure__header">
+          Структура документа
+        </div>
+      </div>
+    </section>
+    
+    <script>
+      //window.$ = window.jQuery = require('./plugins/jquery-3.4.1.min.js')
+      require('./app')
+      require('./menu')
+    </script>
+  </body>
+</html>
