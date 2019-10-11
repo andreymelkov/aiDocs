@@ -19,7 +19,8 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: mainWindowState.width, height: mainWindowState.height,
     x: mainWindowState.x, y: mainWindowState.y,
-    webPreferences: { nodeIntegration: true }
+    webPreferences: { nodeIntegration: true },
+    resizable: false
   })
 
   // Load index.html into the new BrowserWindow

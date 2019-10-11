@@ -1,7 +1,24 @@
 const fs = require('fs')
-const { shell } = require('electron')
 
-let items  = document.getElementById('docs__items')
+let items  = document.getElementById('docs__items'),
+    results_content = document.getElementById('results_content')
+
+
+exports.readSelectedItem = (currentItem) => {
+    if (currentItem === undefined) currentItem = this.getSelectedItem()
+
+    let filePath = `${__dirname}/../public/${this.storage[currentItem.index].file.txt}.txt`
+
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+        if(err){
+            alert("An error ocurred reading the file :" + err.message);
+            return;
+        }
+
+        // Change how to handle the file content
+        results_content.value = data
+    });
+}
 
 exports.storage = JSON.parse(localStorage.getItem('docs-items')) || []
 
@@ -38,10 +55,9 @@ exports.addItem = (item, isNew = false) => {
 
     itemNode.addEventListener('click', this.select)
 
-    // itemNode.addEventListener('dblclick', this.open)
-
     if(document.getElementsByClassName('item').length === 1) {
         itemNode.classList.add('selected')
+        this.readSelectedItem()
     }
 
     if (isNew){
@@ -63,8 +79,13 @@ exports.getSelectedItem = () => {
 }
 
 exports.select = e => {
-    this.getSelectedItem().node.classList.remove('selected')
 
+    let currentItem = this.getSelectedItem()
+    
+    currentItem.node.classList.remove('selected')
+
+    this.readSelectedItem(currentItem)
+    
     e.currentTarget.classList.add('selected')
 }
 
